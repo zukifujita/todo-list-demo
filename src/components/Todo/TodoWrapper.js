@@ -6,27 +6,31 @@ import TodoResource from '../../api/TodoResource';
 
 export default class TodoWrapper extends Component {
 
-  componentDidMount() {
-    TodoResource.getAll()
-      .then(res => res.json())
-      .then(res => {
-        console.log("todos res:", res._embedded.todos);
-        this.props.refreshTodos( res._embedded.todos)
-      })
-  }
-
-  addNewTodo = newTodoContent => {
-    if(newTodoContent) {
-      this.props.createNewTodo(newTodoContent);
+    componentDidMount() {
+        TodoResource.getAll()
+            .then(res => res.json())
+            .then(res => {
+                console.log("todos res:", res._embedded.todos);
+                this.props.refreshTodos(res._embedded.todos)
+            })
     }
-  };
 
-  render() {
-    return (
-      <div className="todo-wrapper">
-        <TodoInput onNewTodoAdded={this.addNewTodo}/>
-        <Todos todos={this.props.todos}/>
-      </div>
-    )
-  }
+    addNewTodo = newTodoContent => {
+        if (newTodoContent) {
+            this.props.createNewTodo(newTodoContent);
+        }
+    };
+
+    retainCheck = todo => {
+        this.props.retainCheck(todo);
+    }
+
+    render() {
+        return (
+            <div className="todo-wrapper">
+                <TodoInput onNewTodoAdded={this.addNewTodo}/>
+                <Todos todos={this.props.todos} retainCheck={this.props.todos}/>
+            </div>
+        )
+    }
 }
