@@ -1,38 +1,48 @@
-import { connect } from 'react-redux'
+import {connect} from 'react-redux'
 import TodoWrapper from '../components/Todo/TodoWrapper';
 import TodoResource from '../api/TodoResource.js';
 
 const mapStateToProps = state => ({
-  isOnlyActive: state.todoResource.isOnlyActive,
-  todos: state.todoResource.todos.filter(_ => {
-    return state.isOnlyActive
-      ? _.status === 'active'
-      : true
-  })
+    isOnlyActive: state.todoResource.isOnlyActive,
+    todos: state.todoResource.todos.filter(_ => {
+        return state.isOnlyActive
+            ? _.status === 'active'
+            : true
+    })
 });
 
-const mapDispatchToProps =  dispatch => ({
-  createNewTodo: newTodo => {
-    const newTodoItem = {
-      content: newTodo,
-      status: "active"
-    };
-    TodoResource.createTodo(newTodoItem)
-      .then(res => res.json())
-      .then(({id, status, content}) => {
-        dispatch({
-          type: 'ADD_TODO',
-          payload: {id, status, content}
-        })
-      })
-  },
-  refreshTodos: todos => dispatch({
-    type: 'REFRESH_TODOS',
-    payload: todos
-  })
+const mapDispatchToProps = dispatch => ({
+    createNewTodo: newTodo => {
+        const newTodoItem = {
+            content: newTodo,
+            status: "active"
+        };
+        TodoResource.createTodo(newTodoItem)
+            .then(res => res.json())
+            .then(({id, status, content}) => {
+                dispatch({
+                    type: 'ADD_TODO',
+                    payload: {id, status, content}
+                })
+            })
+    },
+    refreshTodos: todos => dispatch({
+        type: 'REFRESH_TODOS',
+        payload: todos
+    }),
+    retainCheck: (todo) => {
+        TodoResource.retainCheck(todo)
+            .then(res => res.json())
+            .then(({id, status, content}) => {
+                dispatch({
+                    type: 'RETAIN_CHECK',
+                    payload: {id, status, content}
+                })
+            })
+    }
 });
 
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(TodoWrapper)
