@@ -21,15 +21,15 @@ export default class TodoWrapper extends Component {
         }
     };
 
-    retainCheck = todo => {
+    getCheck = todo => {
         this.props.retainCheck(todo);
-    }
+    };
 
     render() {
         return (
             <div className="todo-wrapper">
                 <TodoInput onNewTodoAdded={this.addNewTodo}/>
-                <Todos todos={this.props.todos} retainCheck={this.props.todos}/>
+                <Todos todos={this.props.todos} receivedCheck={this.getCheck}/>
             </div>
         )
     }

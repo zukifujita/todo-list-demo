@@ -21,8 +21,7 @@ export default class TodoInput extends Component {
             <div>
                 <Input placeholder={"Add todo list here..."} size={"large"} type="text" value={this.state.inputValue}
                        onChange={this.handleInputChange}/>
-                <Button type={"primary"} size={"large"} onClick={this.dispatch}>Add To Do List<Icon
-                    type="check"/></Button>
+                <Button type={"primary"} size={"large"} onClick={this.dispatch}>Add To Do List<Icon type="check"/></Button>
             </div>
         )
     }

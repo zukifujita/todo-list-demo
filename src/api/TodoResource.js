@@ -10,7 +10,7 @@ export default {
             headers: new Headers({'Content-Type': 'application/json'}),
             body: JSON.stringify(todo)
         }),
-    retainCheck: (todo) => fetch(
+    retainCheckBox: (todo) => fetch(
         "http://localhost:8080/api/todos/" + todo.id, {
             mode: 'cors',
             method: 'PATCH',

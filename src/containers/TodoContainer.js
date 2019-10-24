@@ -31,7 +31,7 @@ const mapDispatchToProps = dispatch => ({
         payload: todos
     }),
     retainCheck: (todo) => {
-        TodoResource.retainCheck(todo)
+        TodoResource.retainCheckBox(todo)
             .then(res => res.json())
             .then(({id, status, content}) => {
                 dispatch({

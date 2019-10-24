@@ -6,8 +6,8 @@ import {Card} from "antd";
 export default class Todos extends Component {
 
     changeStatus = (todoItem) => {
-        this.props.retainCheck(todoItem);
-        console.log("todoItem == ", todoItem);
+        this.props.receivedCheck(todoItem);
+        console.log("todoItem == ", todoItem)
     };
 
     render() {
@@ -25,7 +25,6 @@ export default class Todos extends Component {
                     </li>)
                 }
             </div>
-
         )
     }
 }
